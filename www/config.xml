@@ -9,7 +9,7 @@
         xmlns:rim="http://www.blackberry.com/ns/widgets"
 	version="1.0.0.0">
 
-  <name>PhoneGap Sample</name>
+  <name>Nitro Phonegap Test</name>
 
   <description>
       A sample application written with PhoneGap.
