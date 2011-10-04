@@ -9,21 +9,39 @@ website: http://phonegap.com
 -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" id="viewport" content="initial-scale=1.0,user-scalable=no">
-    <script src="json2.js" type="text/javascript"></script>
-    <script src="phonegap.1.0.0.js" type="text/javascript"></script>
-    <script type="text/javascript">
 
-    <title>Insert title here</title>
-  </head>
-  <body onload="init()" onunload="unload()">
-  
- <div>  
-    <script type="text/javascript" src="http://hbayraksan.tumblr.com/js">  
-    </script>  
-</div>  
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+	<title>Loading data into a PhoneGap app</title>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script src="jquery.jsonp-2.1.4.min.js"></script>
+	
+<script>
+$(document).ready(function(){
+	$('#your-tweets').append('<li>Loading Nitro Digital\'s tweets');
+	$.jsonp({
+		url: 'http://twitter.com/status/user_timeline/NitroDigital.json?count=20',
+		callbackParameter: 'callback',
+		timeout: 25000,
+		success: function(data, status) {
+			//$('#your-tweets').append('<li>The feed loads fine');
+			$('#your-tweets').empty();
+			$.each(data, function(i,item){
+				var tweet = item.text;
+				$('#your-tweets').append('<li>'+tweet);
+			});
+		},
+		error: function(){
+			$('#your-tweets').append('<li>There was an error loading the feed');
+		}
+	});
+});
+</script>
+</head>
+<body>
+	<ul id="your-tweets"></ul>
+</body>
 </html>
